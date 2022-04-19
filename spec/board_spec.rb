@@ -32,6 +32,22 @@ describe Board do
     end
   end
 
+  describe '#full?' do
+    context 'when a column has been played X amount of times' do
+      subject(:board) { described_class.new }
+
+      it 'is truthy when X = 6 times' do
+        6.times { board.update_board(1, 'X') }
+        expect(board.full?(1)).to be_truthy
+      end
+
+      it 'is falsy when X = 3 times' do
+        3.times { board.update_board(2, 'X') }
+        expect(board.full?(2)).to be_falsy
+      end
+    end
+  end
+
   describe '#winner?' do
     context 'when a player wins horizontally' do
       it 'puts the winner message'

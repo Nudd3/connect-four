@@ -21,6 +21,10 @@ class Board
     false
   end
 
+  def full?(column)
+    !board[0][column - 1].nil?
+  end
+
   def create_board
     Array.new(6) { Array.new(7) }
   end
