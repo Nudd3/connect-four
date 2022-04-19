@@ -32,25 +32,53 @@ describe Board do
     end
   end
 
-  describe '#full?' do
+  describe '#full_column?' do
     context 'when a column has been played X amount of times' do
       subject(:board) { described_class.new }
 
       it 'is truthy when X = 6 times' do
         6.times { board.update_board(1, 'X') }
-        expect(board.full?(1)).to be_truthy
+        expect(board.full_column?(1)).to be_truthy
       end
 
       it 'is falsy when X = 3 times' do
         3.times { board.update_board(2, 'X') }
-        expect(board.full?(2)).to be_falsy
+        expect(board.full_column?(2)).to be_falsy
       end
     end
   end
 
+  describe '#full_board?' do
+    subject(:board) { described_class.new }
+    it 'is falsy when board is not full' do
+      expect(board.full_board?).to be_falsy
+    end
+
+    it 'is truthy when board is full' do
+      6.times do
+        board.update_board(1, 'X')
+        board.update_board(2, 'X')
+        board.update_board(3, 'X')
+        board.update_board(4, 'X')
+        board.update_board(5, 'X')
+        board.update_board(6, 'X')
+        board.update_board(7, 'X')
+      end
+      expect(board.full_board?).to be_truthy
+    end
+  end
+
   describe '#winner?' do
+    subject(:winner_board) { described_class.new }
+
     context 'when a player wins horizontally' do
-      it 'puts the winner message'
+      it 'is truthy' do
+        winner_board.update_board(3, 'X')
+        winner_board.update_board(4, 'X')
+        winner_board.update_board(5, 'X')
+        winner_board.update_board(6, 'X')
+        expect(winner_board.winner?).to be_truthy
+      end
     end
 
     context 'when a player wins vertically' do
