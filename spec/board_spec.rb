@@ -82,15 +82,21 @@ describe Board do
     end
 
     context 'when a player wins vertically' do
-      it 'puts the winner message'
+      it 'is truthy' do
+        winner_board.update_board(1, 'X')
+        winner_board.update_board(1, 'X')
+        winner_board.update_board(1, 'X')
+        winner_board.update_board(1, 'X')
+        expect(winner_board.winner?).to be_truthy
+      end
     end
 
     context 'when a player wins diagonally going left' do
-      it 'puts the winner message'
+      it 'is truthy'
     end
 
     context 'when a player wins diagonally going right' do
-      it 'puts the winner message'
+      it 'is truthy'
     end
   end
 end
