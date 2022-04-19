@@ -6,7 +6,7 @@ require 'board'
 
 describe Board do
   describe '#update_board' do
-    context 'When updating the first column one time' do
+    context 'When playing in the first column' do
       subject(:board) { described_class.new }
       it 'updates the cell on the board' do
         board.update_board(1, 'X')
@@ -14,20 +14,21 @@ describe Board do
       end
     end
 
-    context 'when updating the last row and the last column with a symbol' do
-      it 'updates the cell on the board'
-    end
-
-    context 'when argument is no a number' do
-      it 'is falsy'
-    end
-
-    context 'when argument is outside bounds' do
-      it 'is falsy'
+    context 'when playing the last column' do
+      subject(:board) { described_class.new }
+      it 'updates the cell on the board' do
+        board.update_board(7, 'X')
+        expect(board.board[5][6]).to eq('X')
+      end
     end
 
     context 'when column is full' do
-      it 'is falsy'
+      subject(:board) { described_class.new }
+
+      it 'is falsy' do
+        6.times { board.update_board(1, 'X') }
+        expect(board.update_board(1, 'X')).to be_falsy
+      end
     end
   end
 

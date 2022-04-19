@@ -13,7 +13,7 @@ class Board
     until start == -1
       if board[start][place - 1] == symbol
         start -= 1
-      else
+      elsif board[start][place - 1].nil?
         board[start][place - 1] = symbol
         return true
       end
