@@ -1,15 +1,33 @@
 # frozen_string_literal: false
 
+# rubocop:disable Metrics/BlockLength
+
 require 'board'
 
 describe Board do
   describe '#update_board' do
-    context 'when updating the first row and the first column with a symbol' do
-      it 'updates the cell on the board'
+    context 'When updating the first column one time' do
+      subject(:board) { described_class.new }
+      it 'updates the cell on the board' do
+        board.update_board(1, 'X')
+        expect(board.board[5][0]).to eq('X')
+      end
     end
 
     context 'when updating the last row and the last column with a symbol' do
       it 'updates the cell on the board'
+    end
+
+    context 'when argument is no a number' do
+      it 'is falsy'
+    end
+
+    context 'when argument is outside bounds' do
+      it 'is falsy'
+    end
+
+    context 'when column is full' do
+      it 'is falsy'
     end
   end
 
@@ -31,3 +49,4 @@ describe Board do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength
