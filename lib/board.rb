@@ -41,14 +41,18 @@ class Board
   def horizontal_check
     board.each do |row|
       row.each_cons(4) do |sub_column|
-        puts "#{sub_column}\n"
         return true if sub_column.uniq.size == 1 && !sub_column.all?(nil)
       end
     end
     false
   end
 
-  def vertical_check 
+  def vertical_check
+    board.transpose.each do |row|
+      row.each_cons(4) do |sub_column|
+        return true if sub_column.uniq.size == 1 && !sub_column.all?(nil)
+      end
+    end
     false
   end
 
