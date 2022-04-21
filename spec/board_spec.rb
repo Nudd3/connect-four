@@ -77,7 +77,7 @@ describe Board do
         winner_board.update_board(4, 'X')
         winner_board.update_board(5, 'X')
         winner_board.update_board(6, 'X')
-        expect(winner_board.winner?).to be_truthy
+        expect(winner_board.winner?('X')).to be_truthy
       end
     end
 
@@ -87,7 +87,7 @@ describe Board do
         winner_board.update_board(1, 'X')
         winner_board.update_board(1, 'X')
         winner_board.update_board(1, 'X')
-        expect(winner_board.winner?).to be_truthy
+        expect(winner_board.winner?('X')).to be_truthy
       end
     end
 
@@ -97,7 +97,7 @@ describe Board do
         winner_board.board[1][5] = 'X'
         winner_board.board[2][4] = 'X'
         winner_board.board[3][3] = 'X'
-        expect(winner_board.winner?).to be_truthy
+        expect(winner_board.winner?('X')).to be_truthy
       end
     end
 
@@ -107,7 +107,7 @@ describe Board do
         winner_board.board[4][5] = 'X'
         winner_board.board[3][4] = 'X'
         winner_board.board[2][3] = 'X'
-        expect(winner_board.winner?).to be_truthy
+        expect(winner_board.winner?('X')).to be_truthy
       end
     end
 
@@ -117,7 +117,7 @@ describe Board do
         winner_board.board[2][2] = 'X'
         winner_board.board[1][1] = 'X'
         winner_board.board[0][0] = 'X'
-        expect(winner_board.winner?).to be_truthy
+        expect(winner_board.winner?('X')).to be_truthy
       end
     end
 
@@ -127,7 +127,7 @@ describe Board do
         winner_board.board[3][2] = 'X'
         winner_board.board[4][1] = 'X'
         winner_board.board[5][0] = 'X'
-        expect(winner_board.winner?).to be_truthy
+        expect(winner_board.winner?('X')).to be_truthy
       end
     end
 
@@ -137,7 +137,7 @@ describe Board do
         winner_board.board[1][1] = 'X'
         winner_board.board[2][2] = 'X'
         winner_board.board[3][3] = 'X'
-        expect(winner_board.winner?).to be_truthy
+        expect(winner_board.winner?('X')).to be_truthy
       end
     end
 
@@ -147,7 +147,7 @@ describe Board do
         winner_board.board[4][1] = 'X'
         winner_board.board[3][2] = 'X'
         winner_board.board[2][3] = 'X'
-        expect(winner_board.winner?).to be_truthy
+        expect(winner_board.winner?('X')).to be_truthy
       end
     end
 
@@ -157,7 +157,7 @@ describe Board do
         winner_board.board[2][4] = 'X'
         winner_board.board[1][5] = 'X'
         winner_board.board[0][6] = 'X'
-        expect(winner_board.winner?).to be_truthy
+        expect(winner_board.winner?('X')).to be_truthy
       end
     end
 
@@ -167,13 +167,13 @@ describe Board do
         winner_board.board[3][4] = 'X'
         winner_board.board[4][5] = 'X'
         winner_board.board[5][6] = 'X'
-        expect(winner_board.winner?).to be_truthy
+        expect(winner_board.winner?('X')).to be_truthy
       end
     end
 
     context 'when there is no winner' do
       it 'is falsy' do
-        expect(winner_board.winner?).to be_falsy
+        expect(winner_board.winner?('X')).to be_falsy
       end
     end
   end
