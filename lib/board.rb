@@ -26,8 +26,7 @@ class Board
   end
 
   def full_board?
-    [board[0][0], board[0][1], board[0][2], board[0][3],
-     board[0][4], board[0][5], board[0][6]].all?
+    board[0].all?
   end
 
   def print_board
@@ -35,10 +34,10 @@ class Board
   end
 
   def winner?
-    horizontal_check || vertical_check || diagonal_check
+    horizontal_winner? || vertical_winner? || diagonal_winner?
   end
 
-  def horizontal_check
+  def horizontal_winner?
     board.each do |row|
       row.each_cons(4) do |sub_column|
         return true if sub_column.uniq.size == 1 && !sub_column.all?(nil)
@@ -47,7 +46,7 @@ class Board
     false
   end
 
-  def vertical_check
+  def vertical_winner?
     board.transpose.each do |row|
       row.each_cons(4) do |sub_column|
         return true if sub_column.uniq.size == 1 && !sub_column.all?(nil)
@@ -56,9 +55,16 @@ class Board
     false
   end
 
-  def diagonal_check
-    false
+  def diagonal_winner?
+    right_diagonal || left_diagonal
   end
+
+  def right_diagonal
+
+  end
+
+  def left_diagonal; end
+
 end
 
 b = Board.new
@@ -69,3 +75,4 @@ b.update_board(7, 'X')
 b.print_board
 puts "\n\n"
 puts b.winner?
+puts "\n\n\n"
