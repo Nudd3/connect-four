@@ -11,11 +11,13 @@ class Board
   def update_board(place, symbol)
     start = 5
     until start == -1
-      if board[start][place - 1] == symbol
-        start -= 1
-      elsif board[start][place - 1].nil?
+      puts "hello"
+      
+      if board[start][place - 1].nil?
         board[start][place - 1] = symbol
         return true
+      else
+          start -= 1
       end
     end
     false
@@ -60,7 +62,17 @@ class Board
   end
 
   def right_diagonal
-
+    puts "inside"
+    for c in (0..board.size - 3) do
+      puts "inside1"
+      for r in (0..board[0].length - 3) do
+        puts "inside2"
+        if board[r][c] == 'X' && board[r+1][c+1] == 'X' && board[r+2][c+2] == 'X' && board[r+3][c+3] == 'X'
+          return true
+        end
+      end
+    end
+    false 
   end
 
   def left_diagonal; end
@@ -68,11 +80,13 @@ class Board
 end
 
 b = Board.new
-b.update_board(1, 'X')
-b.update_board(5, 'X')
-b.update_board(6, 'X')
-b.update_board(7, 'X')
+b.update_board(2, 'O')
+b.update_board(2, 'X')
+b.update_board(2, 'O')
+b.update_board(2, 'X')
+b.update_board(2, 'O')
+
 b.print_board
 puts "\n\n"
-puts b.winner?
+#puts b.right_diagonal
 puts "\n\n\n"
