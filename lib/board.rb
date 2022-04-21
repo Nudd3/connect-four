@@ -59,10 +59,9 @@ class Board
   end
 
   def diagonal_winner?
-    right_down_diagonal || left_diagonal
+    right_down_diagonal || right_up_diagonal
   end
 
-  # 1 & 2
   def right_down_diagonal
     (0...COLUMN_COUNT - 3).each do |c| # Correct
       (0...ROW_COUNT - 3).each do |r| # Correct
@@ -75,7 +74,7 @@ class Board
   end
 
   # 4 & 3
-  def left_diagonal
+  def right_up_diagonal
     (0...COLUMN_COUNT - 3).each do |c| # Correct
       (3...ROW_COUNT).each do |r| 
         if board[r][c] == 'X' && board[r - 1][c + 1] == 'X' && board[r - 2][c + 2] == 'X' && board[r - 3][c + 3] == 'X'
