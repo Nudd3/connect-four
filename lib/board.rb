@@ -1,21 +1,25 @@
 # frozen_string_literal: false
 
+require_relative 'miscellaneous'
 # class representing the board in the game
 class Board
   attr_accessor :board
+
+  include Miscellaneous
 
   ROW_COUNT = 6
   COLUMN_COUNT = 7
 
   # 1. Create a board
   def initialize
-    @board = Array.new(6) { Array.new(7) }
+    @board = Array.new(6, empty_circle) { Array.new(7, empty_circle) }
   end
 
   def update_board(place, symbol)
     start = 5
     until start == -1
-      if board[start][place - 1].nil?
+      #if board[start][place - 1].nil?
+      if board[start][place - 1] == empty_circle
         board[start][place - 1] = symbol
         return true
       else
@@ -26,15 +30,11 @@ class Board
   end
 
   def full_column?(column)
-    !board[0][column - 1].nil?
+    board[0][column - 1] != empty_circle
   end
 
   def full_board?
-    board[0].all?
-  end
-
-  def print_board
-    board.to_a.each { |r| puts r.inspect }
+    board[0].all? { |spot| spot != empty_circle }
   end
 
   def winner?(symbol)
@@ -44,7 +44,6 @@ class Board
   def horizontal_winner?(symbol)
     board.each do |row|
       row.each_cons(4) do |sub_column|
-        #return true if sub_column.uniq.size == 1 && !sub_column.all?(nil)
         return true if sub_column.all?(symbol)
       end
     end
@@ -54,7 +53,6 @@ class Board
   def vertical_winner?(symbol)
     board.transpose.each do |row|
       row.each_cons(4) do |sub_column|
-        #return true if sub_column.uniq.size == 1 && !sub_column.all?(nil)
         return true if sub_column.all?(symbol)
       end
     end
@@ -66,8 +64,8 @@ class Board
   end
 
   def right_down_diagonal(symbol)
-    (0...COLUMN_COUNT - 3).each do |c| # Correct
-      (0...ROW_COUNT - 3).each do |r| # Correct
+    (0...COLUMN_COUNT - 3).each do |c|
+      (0...ROW_COUNT - 3).each do |r|
         if board[r][c] == symbol && board[r + 1][c + 1] == symbol && board[r + 2][c + 2] == symbol && board[r + 3][c + 3] == symbol
           return true
         end
@@ -76,9 +74,8 @@ class Board
     false
   end
 
-  # 4 & 3
   def right_up_diagonal(symbol)
-    (0...COLUMN_COUNT - 3).each do |c| # Correct
+    (0...COLUMN_COUNT - 3).each do |c|
       (3...ROW_COUNT).each do |r| 
         if board[r][c] == symbol && board[r - 1][c + 1] == symbol && board[r - 2][c + 2] == symbol && board[r - 3][c + 3] == symbol
           return true
@@ -86,5 +83,16 @@ class Board
       end
     end
     false
+  end
+
+  def print_board
+    puts '  1 2 3 4 5 6 7 '
+    board.each do |column|
+      print '| '
+      column.each do |val|
+        print "#{val} "
+      end
+      puts '|'
+    end
   end
 end
