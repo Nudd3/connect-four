@@ -3,6 +3,9 @@
 class Board
   attr_accessor :board
 
+  ROW_COUNT = 6
+  COLUMN_COUNT = 7
+
   # 1. Create a board
   def initialize
     @board = Array.new(6) { Array.new(7) }
@@ -11,13 +14,11 @@ class Board
   def update_board(place, symbol)
     start = 5
     until start == -1
-      puts "hello"
-      
       if board[start][place - 1].nil?
         board[start][place - 1] = symbol
         return true
       else
-          start -= 1
+        start -= 1
       end
     end
     false
@@ -58,35 +59,30 @@ class Board
   end
 
   def diagonal_winner?
-    right_diagonal || left_diagonal
+    right_down_diagonal || left_diagonal
   end
 
-  def right_diagonal
-    puts "inside"
-    for c in (0..board.size - 3) do
-      puts "inside1"
-      for r in (0..board[0].length - 3) do
-        puts "inside2"
-        if board[r][c] == 'X' && board[r+1][c+1] == 'X' && board[r+2][c+2] == 'X' && board[r+3][c+3] == 'X'
+  # 1 & 2
+  def right_down_diagonal
+    (0...COLUMN_COUNT - 3).each do |c| # Correct
+      (0...ROW_COUNT - 3).each do |r| # Correct
+        if board[r][c] == 'X' && board[r + 1][c + 1] == 'X' && board[r + 2][c + 2] == 'X' && board[r + 3][c + 3] == 'X'
           return true
         end
       end
     end
-    false 
+    false
   end
 
-  def left_diagonal; end
-
+  # 4 & 3
+  def left_diagonal
+    (0...COLUMN_COUNT - 3).each do |c| # Correct
+      (3...ROW_COUNT).each do |r| 
+        if board[r][c] == 'X' && board[r - 1][c + 1] == 'X' && board[r - 2][c + 2] == 'X' && board[r - 3][c + 3] == 'X'
+          return true
+        end
+      end
+    end
+    false
+  end
 end
-
-b = Board.new
-b.update_board(2, 'O')
-b.update_board(2, 'X')
-b.update_board(2, 'O')
-b.update_board(2, 'X')
-b.update_board(2, 'O')
-
-b.print_board
-puts "\n\n"
-#puts b.right_diagonal
-puts "\n\n\n"

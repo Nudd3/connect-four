@@ -91,12 +91,90 @@ describe Board do
       end
     end
 
-    context 'when a player wins diagonally going left' do
-      it 'is truthy'
+    context 'when a player wins diagonally going down left from top right' do
+      it 'is truthy' do
+        winner_board.board[0][6] = 'X'
+        winner_board.board[1][5] = 'X'
+        winner_board.board[2][4] = 'X'
+        winner_board.board[3][3] = 'X'
+        expect(winner_board.winner?).to be_truthy
+      end
     end
 
-    context 'when a player wins diagonally going right' do
-      it 'is truthy'
+    context 'when a player wins diagonally going up left from bottom right' do
+      it 'is truthy' do
+        winner_board.board[5][6] = 'X'
+        winner_board.board[4][5] = 'X'
+        winner_board.board[3][4] = 'X'
+        winner_board.board[2][3] = 'X'
+        expect(winner_board.winner?).to be_truthy
+      end
+    end
+
+    context 'when a player wins diagonally going up left from middle' do
+      it 'is truthy' do
+        winner_board.board[3][3] = 'X'
+        winner_board.board[2][2] = 'X'
+        winner_board.board[1][1] = 'X'
+        winner_board.board[0][0] = 'X'
+        expect(winner_board.winner?).to be_truthy
+      end
+    end
+
+    context 'when a player wins diagonally going down left from middle' do
+      it 'is truthy' do
+        winner_board.board[2][3] = 'X'
+        winner_board.board[3][2] = 'X'
+        winner_board.board[4][1] = 'X'
+        winner_board.board[5][0] = 'X'
+        expect(winner_board.winner?).to be_truthy
+      end
+    end
+
+    context 'when a player wins diagonally going down right from top left' do
+      it 'is truthy' do
+        winner_board.board[0][0] = 'X'
+        winner_board.board[1][1] = 'X'
+        winner_board.board[2][2] = 'X'
+        winner_board.board[3][3] = 'X'
+        expect(winner_board.winner?).to be_truthy
+      end
+    end
+
+    context 'when a player wins diagonally going up right from bottom left' do
+      it 'is truthy' do
+        winner_board.board[5][0] = 'X'
+        winner_board.board[4][1] = 'X'
+        winner_board.board[3][2] = 'X'
+        winner_board.board[2][3] = 'X'
+        expect(winner_board.winner?).to be_truthy
+      end
+    end
+
+    context 'when a player wins diagonally going up right from middle' do
+      it 'is truthy' do
+        winner_board.board[3][3] = 'X'
+        winner_board.board[2][4] = 'X'
+        winner_board.board[1][5] = 'X'
+        winner_board.board[0][6] = 'X'
+        expect(winner_board.winner?).to be_truthy
+      end
+    end
+
+    context 'when a player wins diagonally going down right from middle' do
+      it 'is truthy' do
+        winner_board.board[2][3] = 'X'
+        winner_board.board[3][4] = 'X'
+        winner_board.board[4][5] = 'X'
+        winner_board.board[5][6] = 'X'
+        expect(winner_board.winner?).to be_truthy
+      end
+    end
+
+    context 'when there is no winner' do
+      it 'is falsy' do
+        expect(winner_board.winner?).to be_falsy
+      end
     end
   end
 end
