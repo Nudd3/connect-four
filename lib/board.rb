@@ -12,13 +12,12 @@ class Board
 
   # 1. Create a board
   def initialize
-    @board = Array.new(6, empty_circle) { Array.new(7, empty_circle) }
+    @board = Array.new(6) { Array.new(7) { empty_circle } }
   end
 
   def update_board(place, symbol)
     start = 5
     until start == -1
-      #if board[start][place - 1].nil?
       if board[start][place - 1] == empty_circle
         board[start][place - 1] = symbol
         return true
@@ -40,6 +39,19 @@ class Board
   def winner?(symbol)
     horizontal_winner?(symbol) || vertical_winner?(symbol) || diagonal_winner?(symbol)
   end
+
+  def print_board
+    puts '  1 2 3 4 5 6 7 '
+    board.each do |column|
+      print '| '
+      column.each do |val|
+        print "#{val} "
+      end
+      puts '|'
+    end
+  end
+
+  private
 
   def horizontal_winner?(symbol)
     board.each do |row|
@@ -85,14 +97,5 @@ class Board
     false
   end
 
-  def print_board
-    puts '  1 2 3 4 5 6 7 '
-    board.each do |column|
-      print '| '
-      column.each do |val|
-        print "#{val} "
-      end
-      puts '|'
-    end
-  end
+  
 end
