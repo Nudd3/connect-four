@@ -33,8 +33,6 @@ class Game
     end
   end
 
-  # private
-
   def player_turn
     @turn += 1
     @turn.odd? ? @player1 : @player2

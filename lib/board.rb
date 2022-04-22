@@ -10,7 +10,6 @@ class Board
   ROW_COUNT = 6
   COLUMN_COUNT = 7
 
-  # 1. Create a board
   def initialize
     @board = Array.new(6) { Array.new(7) { empty_circle } }
   end
@@ -41,6 +40,7 @@ class Board
   end
 
   def print_board
+    puts "\n"
     puts '  1 2 3 4 5 6 7 '
     board.each do |column|
       print '| '
@@ -49,6 +49,7 @@ class Board
       end
       puts '|'
     end
+    puts "\n"
   end
 
   private
@@ -96,6 +97,4 @@ class Board
     end
     false
   end
-
-  
 end
