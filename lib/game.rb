@@ -34,7 +34,7 @@ class Game
     print draw_message
   end
 
-  private
+  # private
 
   def player_turn
     @turn += 1
@@ -45,16 +45,17 @@ class Game
     puts "It's #{player.name}'s (#{player.symbol}):"
     loop do
       print 'Please choose a place to put your symbol: '
-      input = gets.chomp
+      input = gets.chomp.to_i
       return input if verify_input
     end
   end
 
   def verify_input(input)
-    if !input.match(/^[1-7]$/)
+    unless input.is_a?(Integer) && input.between?(1, 7) 
       puts 'Input needs to be between 1 and 7'
       return false
-    elsif @board.full_column?(input)
+    end
+    if @board.full_column?(input)
       puts 'That column is full'
       return false
     end

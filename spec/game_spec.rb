@@ -1,5 +1,8 @@
 # frozen_string_literal: false
 
+require 'game'
+require 'miscellaneous'
+require 'board'
 # What happens in the game class?
 # 1. Create the players and the board
 # 2. Start the game
@@ -24,16 +27,31 @@ describe Game do
   end
 
   describe '#verify_input' do
+    subject(:input_testing) { described_class.new }
     context 'when input is good' do
-      it 'is truthy'
+      it 'is truthy' do
+        valid_input = 5
+        expect(input_testing.verify_input(valid_input)).to be true
+      end
     end
 
     context 'when input is bad' do
-      it 'is falsy when input a digit outside 1-7'
+      it 'is falsy when input a digit outside 1-7' do
+        unvalid_input = 8
+        expect(input_testing.verify_input(unvalid_input)).to be false
+      end
 
-      it 'is falsy when input is not a digit'
+      it 'is falsy when input is not a digit' do
+        unvalid_input = 'N'
+        expect(input_testing.verify_input(unvalid_input)).to be false
+      end
 
-      it 'is falsy when column if full'
+      it 'is falsy when column if full' do
+        6.times do 
+          input_testing.board.update_board(1, input_testing.board.red_circle)
+        end
+        expect(input_testing.verify_input(1)).to be false
+      end
     end
   end
 end
