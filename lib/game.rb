@@ -8,13 +8,14 @@ require_relative 'miscellaneous'
 class Game
   include Miscellaneous
 
-  attr_reader :board
+  attr_accessor :turn, :board
 
   def initialize
     generate_players
     @board = Board.new
     puts "Player 1: #{@player1}"
     puts "Player 2: #{@player2}"
+    @turn = 0
   end
 
   def play
@@ -23,7 +24,6 @@ class Game
   end
 
   def take_turns
-    @turn = 1
     until board.full?
       current_player = player_turn
       choice = player_input(current_player)
@@ -51,7 +51,7 @@ class Game
   end
 
   def verify_input(input)
-    unless input.is_a?(Integer) && input.between?(1, 7) 
+    unless input.is_a?(Integer) && input.between?(1, 7)
       puts 'Input needs to be between 1 and 7'
       return false
     end

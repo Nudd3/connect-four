@@ -2,7 +2,7 @@
 
 # player class
 class Player
-  attr_reader :name, :symbol
+  attr_accessor :name, :symbol
 
   def initialize(name, symbol)
     @name = name
