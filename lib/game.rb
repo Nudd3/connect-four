@@ -24,14 +24,13 @@ class Game
   end
 
   def take_turns
-    until board.full?
+    loop do
       current_player = player_turn
       choice = player_input(current_player)
       @board.update_board(choice, current_player.symbol)
       @board.print_board
-      break if winner?
+      break if game_over?(current_player)
     end
-    print draw_message
   end
 
   # private
@@ -42,11 +41,11 @@ class Game
   end
 
   def player_input(player)
-    puts "It's #{player.name}'s (#{player.symbol}):"
+    puts "It's #{player.name}'s (#{player.symbol}) turn:"
     loop do
       print 'Please choose a place to put your symbol: '
       input = gets.chomp.to_i
-      return input if verify_input
+      return input if verify_input(input)
     end
   end
 
@@ -74,7 +73,15 @@ class Game
     symbol = player_number == 1 ? red_circle : blue_circle
     Player.new(player_name, symbol)
   end
-end
 
-g = Game.new
-g.board.print_board
+  def game_over?(player)
+    if board.winner?(player.symbol)
+      puts "Congratulations #{player.name}! You won!"
+      return true
+    elsif board.full_board?
+      puts "It's a draw!"
+      return true
+    end
+    false
+  end
+end

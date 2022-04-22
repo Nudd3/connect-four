@@ -72,5 +72,37 @@ describe Game do
       end
     end
   end
+
+  describe '#game_over?' do
+    context 'when a player wins' do
+      subject(:winner_game) { described_class.new }
+      let(:board) { winner_game.instance_variable_get(:@board) }
+      let(:player) { instance_double(Player, name: 'John', symbol: 'X') }
+
+      before do
+        allow(board).to receive(:right_down_diagonal).and_return(true)
+      end
+
+      it 'prints the winner message' do
+        winner_message = "Congratulations John! You won!\n"
+        expect { winner_game.game_over?(player) }.to output(winner_message).to_stdout
+      end
+    end
+
+    context 'when the board is full' do
+      subject(:draw_game) { described_class.new }
+      let(:board) { draw_game.instance_variable_get(:@board) }
+      let(:player) { instance_double(Player, name: 'John', symbol: 'X')}
+
+      before do
+        allow(board).to receive(:full_board?).and_return(true)
+      end
+      it 'is prints the draw message' do
+        draw_message = "It's a draw!\n"
+        expect { draw_game.game_over?(player) }.to output(draw_message).to_stdout
+      end
+    end
+
+  end
 end
 # rubocop:enable Metrics/BlockLength
