@@ -1,27 +1,15 @@
 # frozen_string_literal: false
 
-require_relative 'board'
-require_relative 'player'
-require_relative 'miscellaneous'
+# What happens in the game class?
+# 1. Create the players and the board
+# 2. Start the game
+# 3. Players take turns
+#    *- Verify the input: Only numbers 1 - 7
+#     - Check that column isn't full
+#     - After each turn -> Check for winner and print board
 
-# Class for playing the game
-class Game
-  include Miscellaneous
-
-  def initialize
-    create_players
-    @board = Board.new
-  end
-
-  def generate_players
-    @player1 = create_player(1)
-    @player2 = create_player(2)
-  end
-
-  def create_player(player_number)
-    p prompt_player_name(player_number)
-    player_name = gets.chomp
-    
-  end
-
-end
+# What methods needs to be checked?
+# - play -> No, since all methods are tested elsewhere
+# - player_turn -> Yes, make sure that it's every other
+# - player_input -> Yes, make sure that input is good
+# - game_over? -> Yes, if there's a winner or a tie
